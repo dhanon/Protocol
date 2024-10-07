@@ -37,3 +37,56 @@ let rectangle = Rectangle(width: 10, height: 5)
 
 printArea(title: "Area of Circle:", of: circle)   // Extending behavior without modifying the original function
 printArea(title: "Area of Rectangle:", of: rectangle)
+
+
+// create a protocol that conforms by a class.
+protocol classa {
+
+   // Properties
+   var marks: Int { get set }
+   var result: Bool { get }
+   
+   // Method
+   func attendance() -> String
+   func markssecured() -> String
+}
+
+// Protocol
+protocol classb: classa {
+   
+   // Properties
+   var present: Bool { get set }
+   var subject: String { get set }
+   var stname: String { get set }
+}
+
+// Class that conform Protocol
+class classc: classb {
+   var marks = 96
+   let result = true
+   var present = false
+   var subject = "Swift 4 Protocols"
+   var stname = "Protocols"
+   
+   func attendance() -> String {
+      return "The \(stname) has secured 99% attendance"
+   }
+   
+   func markssecured() -> String {
+      return "\(stname) has scored \(marks)"
+   }
+}
+
+// Instance of class
+let studdet = classc()
+studdet.stname = "Swift 4"
+studdet.marks = 98
+
+// Accessing methods and properties
+print(studdet.markssecured())
+
+print(studdet.marks)
+print(studdet.result)
+print(studdet.present)
+print(studdet.subject)
+print(studdet.stname)
