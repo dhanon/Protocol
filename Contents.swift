@@ -90,3 +90,38 @@ print(studdet.result)
 print(studdet.present)
 print(studdet.subject)
 print(studdet.stname)
+
+
+// Protocol with mutating method requirements.
+protocol daysofaweek {
+   // Mutating method
+   mutating func display()
+}
+
+// Enumeration that conforms to the Protocol
+enum days: daysofaweek {
+   case sun, mon, tue, wed, thurs, fri, sat
+    
+   mutating func display() {
+      switch self {
+         case .sun:
+            print("Sunday")
+         case .mon:
+            print("Monday")
+         case .tue:
+            print("Tuesday")
+         case .wed:
+            print("Wednesday")
+         case .thurs:
+            print("Thursday")
+         case .fri:
+            print("Friday")
+         case .sat:
+            print("Saturday")
+      }
+   }
+}
+
+// Instance of enumeration
+var res = days.wed
+res.display()
