@@ -125,3 +125,100 @@ enum days: daysofaweek {
 // Instance of enumeration
 var res = days.wed
 res.display()
+
+
+// Protocol with an initializer that conforms to the class.
+protocol tcpprotocol {
+
+   // Initializer
+   init(no1: Int)
+}
+
+class mainClass {
+   var no1: Int // local storage
+   init(no1: Int) {
+      self.no1 = no1 // initialization
+   }
+}
+
+// Class that conform protocol
+class subClass: mainClass, tcpprotocol {
+   var no2: Int
+   init(no1: Int, no2 : Int) {
+      self.no2 = no2
+      super.init(no1:no1)
+   }
+   
+   // Requires only one parameter for convenient method
+   required override convenience init(no1: Int)  {
+      self.init(no1:no1, no2:0)
+   }
+}
+
+// Class instances
+let obj1 = mainClass(no1: 20)
+let obj2 = subClass(no1: 30, no2: 50)
+
+print("res is: \(obj1.no1)")
+print("res is: \(obj2.no1)")
+print("res is: \(obj2.no2)")
+
+
+//Protocol Inheritance
+protocol ClassA {
+   var no1: Int { get set }
+   func calc(sum: Int)
+}
+
+protocol Result {
+   func print(target: ClassA)
+}
+
+class Student2: Result {
+   func print(target: ClassA) {
+      target.calc(sum: 1)
+   }
+}
+
+class ClassB: Result {
+   func print(target: ClassA) {
+      target.calc(sum: 5)
+   }
+}
+
+class Student: ClassA {
+   var no1: Int = 10
+    
+   func calc(sum: Int) {
+      no1 -= sum
+      print("Student attempted \(sum) times to pass")
+        
+      if no1 <= 0 {
+         print("Student is absent for the exam")
+      }
+   }
+}
+
+class Player {
+   var stmark: Result!
+    
+   init(stmark: Result) {
+      self.stmark = stmark
+   }
+    
+   func print(target: ClassA) {
+      stmark.print(target: target)
+   }
+}
+
+var marks = Player(stmark: Student2())
+var marksec = Student()
+
+marks.print(target: marksec)
+marks.print(target: marksec)
+marks.print(target: marksec)
+
+marks.stmark = ClassB()
+marks.print(target: marksec)
+marks.print(target: marksec)
+marks.print(target: marksec)
