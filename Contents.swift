@@ -222,3 +222,106 @@ marks.stmark = ClassB()
 marks.print(target: marksec)
 marks.print(target: marksec)
 marks.print(target: marksec)
+
+
+// Protocol with Extension
+
+protocol Generator {
+   associatedtype Element
+   mutating func next() -> Element?
+}
+
+extension Array: Generator {
+   mutating func next() -> Element? {
+      guard !isEmpty else { return nil }
+      return removeFirst()
+   }
+}
+
+var items = [10, 20, 30]
+while let x = items.next() {
+   print(x)
+}
+
+for lists in [1, 2, 3].compactMap({ i in i * 5 }) {
+   print(lists)
+}
+
+print([100, 200, 300])
+print([1, 2, 3].map({ i in i * 10 }))
+
+
+protocol AgeClassificationProtocol {
+   var age: Int { get }
+   func ageType() -> String
+}
+
+class Person: AgeClassificationProtocol {
+   let firstname: String
+   let lastname: String
+   var age: Int
+
+   init(firstname: String, lastname: String, age: Int) {
+      self.firstname = firstname
+      self.lastname = lastname
+      self.age = age
+   }
+
+   func fullname() -> String {
+      return firstname + " " + lastname
+   }
+
+   func ageType() -> String {
+      switch age {
+         case 0...2:
+            return "Baby"
+         case 3...12:
+            return "Child"
+         case 13...19:
+            return "Teenager"
+         case 65...:
+            return "Elderly"
+         default:
+            return "Normal"
+        }
+    }
+}
+
+let obj = Person(firstname: "Mona", lastname: "Singh", age: 10)
+print("Full Name: \(obj.fullname())")
+print("Age Type: \(obj.ageType())")
+
+
+
+//Class Only Protocols
+
+protocol tcpprotocol {
+   init(no1: Int)
+}
+
+class mainClass {
+   var no1: Int // local storage
+   init(no1: Int) {
+      self.no1 = no1 // initialization
+   }
+}
+
+class subClass: mainClass, tcpprotocol {
+   var no2: Int
+   init(no1: Int, no2 : Int) {
+      self.no2 = no2
+      super.init(no1:no1)
+   }
+   
+   // Requires only one parameter for convenient method
+   required override convenience init(no1: Int)  {
+      self.init(no1:no1, no2:0)
+   }
+}
+
+let res = mainClass(no1: 20)
+let obj = subClass(no1: 30, no2: 50)
+
+print("res is: \(res.no1)")
+print("res is: \(obj.no1)")
+print("res is: \(obj.no2)")
