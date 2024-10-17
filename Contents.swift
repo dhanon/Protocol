@@ -292,36 +292,33 @@ print("Full Name: \(obj.fullname())")
 print("Age Type: \(obj.ageType())")
 
 
-
-//Class Only Protocols
-
-protocol tcpprotocol {
-   init(no1: Int)
-}
-
-class mainClass {
-   var no1: Int // local storage
-   init(no1: Int) {
-      self.no1 = no1 // initialization
-   }
-}
-
-class subClass: mainClass, tcpprotocol {
-   var no2: Int
-   init(no1: Int, no2 : Int) {
-      self.no2 = no2
-      super.init(no1:no1)
-   }
-   
-   // Requires only one parameter for convenient method
-   required override convenience init(no1: Int)  {
-      self.init(no1:no1, no2:0)
-   }
-}
-
-let res = mainClass(no1: 20)
-let obj = subClass(no1: 30, no2: 50)
-
-print("res is: \(res.no1)")
-print("res is: \(obj.no1)")
-print("res is: \(obj.no2)")
+//Checking for Protocol Conformancex`
+//@objc protocol rectangle {
+//   var area: Double { get }
+//}
+//
+//@objc class Circle: rectangle {
+//   let pi = 3.1415927
+//   var radius: Double
+//   var area: Double { return pi * radius * radius }
+//   init(radius: Double) { self.radius = radius }
+//}
+//
+//@objc class result: rectangle {
+//   var area: Double
+//   init(area: Double) { self.area = area }
+//}
+//
+//class sides {
+//   var rectsides: Int
+//   init(rectsides: Int) { self.rectsides = rectsides }
+//}
+//let objects: [AnyObject] = [Circle(radius: 2.0),result(area: 198),sides(rectsides: 4)]
+//
+//for object in objects {
+//   if let objectWithArea = object as? rectangle {
+//      print("Area is \(objectWithArea.area)")
+//   } else {
+//      print("Rectangle area is not defined")
+//   }
+//}
